@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Visitor_Management_System2019student.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Visitor_Management_System2019student.Services;
 
 namespace Visitor_Management_System2019student
 {
@@ -35,16 +36,18 @@ namespace Visitor_Management_System2019student
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = Identity.db"));
             services.AddDbContext<visitorDBcontext>(options =>
                 options.UseSqlite("Data Source = Vman.db"));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            // Skipped lots of code until the end. Add it anywhere before AddMVC
+            services.AddSingleton<ITextFileOperations, TextFileOperations>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

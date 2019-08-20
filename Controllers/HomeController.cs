@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Visitor_Management_System2019student.Models;
 using Microsoft.AspNetCore.Hosting;
+using Visitor_Management_System2019student.Services;
 namespace Visitor_Management_System2019student.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
-        public HomeController(IHostingEnvironment hostingEnvironment)
+        private ITextFileOperations _textFileOperations;
+
+        public HomeController(ITextFileOperations textFileOperations)
         {
-            _hostingEnvironment = hostingEnvironment;
+            _textFileOperations = textFileOperations;
         }
         public IActionResult Index()
         {
@@ -36,10 +38,8 @@ namespace Visitor_Management_System2019student.Controllers
 
             //======= Conditions of Acceptance
             //Gets or sets the absolute path to the directory that contains the web-servable application content files.
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            FileInfo filePath = new FileInfo(Path.Combine(webRootPath, "ConditionsForAdmittance.txt"));
-            string[] lines = System.IO.File.ReadAllLines(filePath.ToString());
-            ViewData["Conditions"] = lines;
+
+            ViewData["Conditions"] = _textFileOperations.LoadConditionsForAcceptanceText();
 
 
 

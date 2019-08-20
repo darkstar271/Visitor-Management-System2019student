@@ -11,6 +11,7 @@ namespace Visitor_Management_System2019student.Services
     {
 
         private readonly IHostingEnvironment _hostingEnvironment;
+
         public TextFileOperations(IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;

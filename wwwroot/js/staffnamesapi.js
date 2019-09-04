@@ -104,10 +104,10 @@ function deleteItem(id) {
 function editItem(id) {
     $.each(allStaff,
         function (key, item) {
-            if (item.id === id) {//where the ID == the one on the click
+            if (item.id === id) {//where the ID == the one on the click comparison of type and value
                 $("#edit-name").val(item.name); //add it to the form field
                 $("#edit-id").val(item.id);
-                $("#edit-department").val(item.department);;
+                $("#edit-department").val(item.department);
             }
         });
 }

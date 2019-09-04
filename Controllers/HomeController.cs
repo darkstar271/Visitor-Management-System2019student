@@ -45,7 +45,10 @@ namespace Visitor_Management_System2019student.Controllers
 
             return View();
         }
-
+        public IActionResult StaffNamesAPI()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
